@@ -1,0 +1,235 @@
+/* homepage */
+.homepage_body{
+  background: linear-gradient(135deg, #010101, rgb(255, 78, 108), rgb(0, 0, 0));
+  font-family: 'Jersey 20';
+}
+
+.bg {
+    position: absolute;
+    top: 50%;             
+    left: 50%;           
+    transform: translate(-50%, -50%); 
+    width: 1100px;
+    z-index: -1;
+    border-radius: 20px;
+    border: 3px solid white;
+}
+
+.logo {
+    width: 600px;
+    background: rgba(0, 0, 0, 0.406);
+    padding: 10px;
+    border-radius: 20px;
+    border: 3px solid white;
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+.logo_cnt{
+   position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Exp{
+    font-size: 40px;
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    font-family: century gothic;
+animation: flashlight 1s infinite;
+}
+
+@keyframes flashlight {
+    0%, 100% {
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        border-color: white;
+        text-shadow: none;
+        box-shadow: none;
+    }
+    25%, 75% {
+        background: white;
+        color: black; /* ensures text is visible */
+        border-color: white;
+        text-shadow: 0 0 10px black, 0 0 20px black;
+        box-shadow: 0 0 60px 30px white, 0 0 100px 60px white;
+    }
+    50% {
+        background: yellow;
+        color: black;
+        border-color: yellow;
+        text-shadow: 0 0 20px black, 0 0 40px black;
+        box-shadow: 0 0 80px 40px yellow, 0 0 150px 80px white;
+    }
+}
+
+.Exp:hover{
+  animation: none;
+}
+
+.enter_game{
+    text-decoration: none;
+    font-size: 60px;
+    color: white;
+    border: 3px solid white;
+    border-radius: 10px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    transition: 0.3s;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 0, 76, 0.6);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 0, 76, 0.9), 0 0 40px rgba(255, 0, 76, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 0, 76, 0.6);
+  }
+}
+
+.enter_game:hover{
+    background: rgba(255, 255, 255, 0.6);
+    color: black;
+    animation: none;
+}
+
+/* lobby page */
+.lobby_body {
+  font-family: 'Jersey 20';
+  margin: 0;
+  overflow: hidden;
+  height: 100vh; /* full viewport height */
+  width: 100vw;  /* full viewport width */
+  background: linear-gradient(90deg, #010101, rgb(255, 78, 108), rgb(0, 0, 0));
+}
+
+
+.entrance {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  z-index: 1;
+  opacity: 0;
+  animation: entranceFade 10s forwards, hideBoth 5s forwards;
+  animation-delay: 0s, 25s; /* fade-in immediately, hide after 25s */
+}
+
+.guards {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  z-index: 2;
+  opacity: 0;
+  animation: guardsFade 10s forwards, hideBoth 5s forwards;
+  animation-delay: 10s, 25s; /* fade-in after 10s, hide after 25s */
+}
+
+@keyframes entranceFade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes guardsFade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes hideBoth {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.alarm {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: red;
+  opacity: 0;
+  pointer-events: none; /* so it doesn’t block clicks */
+  animation: flash 1s infinite;
+  animation-delay: 10s; /* start when guards fully appear */
+}
+
+/* Flashing effect */
+@keyframes flash {
+  0%, 50%, 100% { opacity: 0; }
+  25%, 75% { opacity: 0.5; } /* semi-transparent red flashes */
+}
+
+/* Hide overlay after images disappear */
+.alarm.hide {
+  animation: none;
+  opacity: 0;
+}
+
+.gamemode_cnt{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    z-index: 3;
+    background: rgb(0, 0, 50);
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    border: 2px solid white;
+    padding: 30px;
+      transition: opacity 3s ease; /* smooth fade-in */
+      pointer-events: none;
+        opacity: 0;
+}
+
+.gamemode_cnt.visible {
+      opacity: 1;
+      pointer-events: auto; /* enable clicks when visible */
+    }
+
+.gamecnt_1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+}
+
+.banner{
+    width: 100%;
+    border-radius: 20px;
+    border: 2px solid white;
+    transition: 0.3s;
+}
+
+.banner:hover{
+    transform: scale(1.05);
+}
+

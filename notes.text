@@ -1,0 +1,37 @@
+ <img class="entrance" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k542j13zfa2an5gakp5b9pad%2F1757852397_img_0.webp?st=2025-09-14T10%3A52%3A53Z&se=2025-09-20T11%3A52%3A53Z&sks=b&skt=2025-09-14T10%3A52%3A53Z&ske=2025-09-20T11%3A52%3A53Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=fh9vXcrfyUPbhS%2B4s1Ryomb8SJ7RpJPwNHyubv7S5F0%3D&az=oaivgprodscus">
+        <img class="guards" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k542scagf8frsktjc1ptqn7n%2F1757852643_img_1.webp?st=2025-09-14T10%3A52%3A43Z&se=2025-09-20T11%3A52%3A43Z&sks=b&skt=2025-09-14T10%3A52%3A43Z&ske=2025-09-20T11%3A52%3A43Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=TlLLDmu7ideNmq3PZYCAFUaS9fskKEc3UjtiJteLhhU%3D&az=oaivgprodscus">
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+Put this at the first in the body of lobby ^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+<img class="entrance" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k542j13zfa2an5gakp5b9pad%2F1757852397_img_0.webp?st=2025-09-14T10%3A52%3A53Z&se=2025-09-20T11%3A52%3A53Z&sks=b&skt=2025-09-14T10%3A52%3A53Z&ske=2025-09-20T11%3A52%3A53Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=fh9vXcrfyUPbhS%2B4s1Ryomb8SJ7RpJPwNHyubv7S5F0%3D&az=oaivgprodscus">
+  <img class="guards" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k542scagf8frsktjc1ptqn7n%2F1757852643_img_1.webp?st=2025-09-14T10%3A52%3A43Z&se=2025-09-20T11%3A52%3A43Z&sks=b&skt=2025-09-14T10%3A52%3A43Z&ske=2025-09-20T11%3A52%3A43Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=TlLLDmu7ideNmq3PZYCAFUaS9fskKEc3UjtiJteLhhU%3D&az=oaivgprodscus">
+
+  <div id="alarm" style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: red;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+  "></div>
+
+  <audio id="bgMusic" src="resources/squid_games_pink_solid.mp3"></audio>
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+SIDEBAR CODE MAY BE USABLE
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  <div class="gamemode_cnt">
+    <div class="gamecnt_1">
+      <a href="Dalgona.html"><img class="banner" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k5475nqxfcst0vfv8crtveks%2F1757857195_img_1.webp?st=2025-09-14T11%3A46%3A34Z&se=2025-09-20T12%3A46%3A34Z&sks=b&skt=2025-09-14T11%3A46%3A34Z&ske=2025-09-20T12%3A46%3A34Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=cZWYtOClj4z%2F57%2FSVIEo1xnb3YAZ5UKic3OtXgZThrU%3D&az=oaivgprodscus"></a>
+      <a href="Pentathlon.html"><img class="banner" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k547qbk0fakv057vwhvajyrw%2F1757857826_img_1.webp?st=2025-09-14T12%3A42%3A48Z&se=2025-09-20T13%3A42%3A48Z&sks=b&skt=2025-09-14T12%3A42%3A48Z&ske=2025-09-20T13%3A42%3A48Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=2ltL8EkcuT%2B1RF7lEU21WAHRpPMkkx0oFKv5f3c5sx4%3D&az=oaivgprodscus"></a>
+    </div>
+    <div class="gamecnt_2">
+      <a href="Glass-bridge.html"><img class="banner" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k54813ebffx97ztgz6nm2g0h%2F1757858173_img_0.webp?st=2025-09-14T12%3A41%3A37Z&se=2025-09-20T13%3A41%3A37Z&sks=b&skt=2025-09-14T12%3A41%3A37Z&ske=2025-09-20T13%3A41%3A37Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=YErQj56a3buKwqEWCfRs8FjKpyXFntk9W95RM6OPJYU%3D&az=oaivgprodscus"></a>
+      <a href="Tug-of-war.html"><img class="banner" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k5489z1gffc9ynd0msffxrqm%2F1757858425_img_0.webp?st=2025-09-14T12%3A43%3A27Z&se=2025-09-20T13%3A43%3A27Z&sks=b&skt=2025-09-14T12%3A43%3A27Z&ske=2025-09-20T13%3A43%3A27Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=LkHMy9dKTttJ3eAMUCLv%2BHkgX4MHdIUpzNStOxxL1jI%3D&az=oaivgprodscus"></a>
+    </div>
+  </div>

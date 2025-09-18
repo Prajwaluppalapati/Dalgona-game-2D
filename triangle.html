@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dalgona | Triangle</title>
+<link rel="icon" type="image/webp" href="https://videos.openai.com/vg-assets/assets%2Ftask_01k5e4c143e34v8fb1kfkv3dka%2F1758189800_img_0.webp?st=2025-09-18T08%3A39%3A55Z&se=2025-09-24T09%3A39%3A55Z&sks=b&skt=2025-09-18T08%3A39%3A55Z&ske=2025-09-24T09%3A39%3A55Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=ESruV8K0zJNEs6m2ENnAn8gQEji4A%2Be6rup9fpJZ%2FMQ%3D&az=oaivgprodscus">
+<style>
+  :root{
+    --bg: #0f0f0f;
+    --cookie: #f5d88c;
+    --band: #000;
+    --neon: #39ff14;
+  }
+  html,body {
+    background: url('https://videos.openai.com/vg-assets/assets%2Ftask_01k56zbzfmfcstqgpax67ez3h5%2F1757949736_img_1.webp?st=2025-09-15T14%3A03%3A22Z&se=2025-09-21T15%3A03%3A22Z&sks=b&skt=2025-09-15T14%3A03%3A22Z&ske=2025-09-21T15%3A03%3A22Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=lWJiOEe9Kzw9nUDVTFpgIOjI1DoaAN1gZSfsBOsWvG4%3D&az=oaivgprodscus');
+    background-repeat: no-repeat;
+    background-size: 1950px;
+    width: 100%;
+    background-position-y: -330px;
+    height: 100%; margin:0; font-family:Inter, Arial, sans-serif;
+    color:#fff; display:flex; align-items:center; justify-content:center; flex-direction:column;
+      cursor: none;
+  }
+  .wrap { display:flex; flex-direction:column; align-items:center; }
+  .canvas-wrap { position:relative; width:500px; height:500px; }
+  canvas { position:absolute; left:0; top:0; width:100%; height:100%; border-radius:50%; }
+  #baseCanvas{ background: var(--cookie); border-radius: 50%; }
+  #strokesCanvas, #pointerCanvas, #confettiCanvas, #effectsCanvas { pointer-events:none; }
+  #confettiCanvas, #effectsCanvas { z-index:10; }
+  #controls { margin-top:16px; display:flex; gap:12px; align-items:center; }
+  button { background:#111; color:var(--neon); padding:8px 12px; border:1px solid rgba(255,255,255,0.04); border-radius:8px; cursor:pointer; font-weight:600; }
+  #message { margin-top:14px; font-size:18px; text-align:center; min-height:26px; }
+  .win { color:#00ff77; } .lose { color:#ff6b6b; }
+  #restartBig {
+    position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);
+    padding:16px 28px; font-size:20px;
+    background:#ff3b3b; color:#fff; border:none;
+    border-radius:12px; cursor:pointer; font-weight:bold;
+    display:none; z-index:20;
+  }
+
+    #pin {
+      position: fixed;
+      width: 230px;  /* size of pin */
+      height: auto;
+      pointer-events: none; /* so it doesn't block clicks */
+      transform: translate(-115px, -200px); /* adjust so tip aligns with cursor */
+    }
+
+    .gamemode_cnt{
+    position: absolute;
+    top: 27%;
+    left: 9%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 3;
+    background: rgb(0, 0, 50);
+    width: 13.5%;
+    height: auto;
+    border-radius: 20px;
+    border: 2px solid white;
+    padding: 30px;
+}
+
+.gamecnt_1{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5px;
+    height: fit-content;
+}
+
+.gamecnt_2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+     justify-content: space-around;
+    gap: 5px;
+    height: fit-content;   
+}
+
+.banner{
+    width: 100%;
+    border-radius: 20px;
+    border: 2px solid white;
+    transition: 0.3s;
+}
+
+.banner:hover{
+    transform: scale(1.05);
+}
+
+</style>
+</head>
+<body>
+  <div class="gamemode_cnt">
+    <div class="gamecnt_1">
+      <a href="circle.html"><img class="banner" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k5e2wc37fgcrx4d2ceax3vht%2F1758188267_img_0.webp?st=2025-09-18T07%3A43%3A47Z&se=2025-09-24T08%3A43%3A47Z&sks=b&skt=2025-09-18T07%3A43%3A47Z&ske=2025-09-24T08%3A43%3A47Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=nZR80mRlxiHUA9dzMNjihXihZ3u4mkWvaW%2FueFRdi3Y%3D&az=oaivgprodscus"></a>
+      <a href="triangle.html"><img class="banner" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k5e2ggymer69t4pq9xyk2hjh%2F1758187899_img_0.webp?st=2025-09-18T07%3A43%3A15Z&se=2025-09-24T08%3A43%3A15Z&sks=b&skt=2025-09-18T07%3A43%3A15Z&ske=2025-09-24T08%3A43%3A15Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=o1nX3DCBMNbHnc7JBc5aLOrNmLpSjZtBtzkvfarDhIc%3D&az=oaivgprodscus"></a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="canvas-wrap" id="canvasWrap">
+      <canvas id="baseCanvas" width="500" height="500"></canvas>
+      <canvas id="strokesCanvas" width="500" height="500"></canvas>
+      <canvas id="pointerCanvas" width="500" height="500"></canvas>
+
+      <canvas id="confettiCanvas" width="500" height="500"></canvas>
+      <canvas id="effectsCanvas" width="500" height="500"></canvas>
+      <button id="restartBig">Restart</button>
+    </div>
+
+    <div id="controls">
+      <button id="resetBtn">Reset</button>
+      <button id="hintBtn">Hint</button>
+    </div>
+
+    <div id="message">Click the black band to start tracing the triangle.</div>
+  </div>
+
+  <audio id="bgMusic" autoplay loop>
+  <source src="resources/needles_and_dalgona_12.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+ <img id="pin" src="https://www.pngarts.com/files/3/Sewing-Needle-PNG-Background-Image.png" alt="pin">
+
+<script>
+(() => {
+  // ---- CONFIG (strict single-pass detection) ----
+  const BAND_WIDTH = 20;
+  const MARKER_THICKNESS = BAND_WIDTH * 2;
+  const CHECK_TOLERANCE = Math.max(10, Math.round(MARKER_THICKNESS * 0.5));
+  const STRAY_ALLOWANCE = 8;
+  const CHECKPOINTS_PER_EDGE = 140; // higher resolution
+  const SESSION_PROGRESS_THRESHOLD = 0.98; // how much of each edge must be covered during the single stroke
+  const SESSION_EDGE_SPREAD = 0.92;       // must span across most of edge
+
+  // ---- CANVAS SETUP ----
+  const base = document.getElementById('baseCanvas');
+  const strokes = document.getElementById('strokesCanvas');
+  const pointer = document.getElementById('pointerCanvas');
+  const confettiCanvas = document.getElementById('confettiCanvas');
+  const effectsCanvas = document.getElementById('effectsCanvas');
+  const wrap = document.getElementById('canvasWrap');
+  const bctx = base.getContext('2d');
+  const sctx = strokes.getContext('2d');
+  const pctx = pointer.getContext('2d');
+  const confettiCtx = confettiCanvas.getContext('2d');
+  const effectsCtx = effectsCanvas.getContext('2d');
+  const msgEl = document.getElementById('message');
+  const resetBtn = document.getElementById('resetBtn');
+  const hintBtn = document.getElementById('hintBtn');
+  const restartBigBtn = document.getElementById('restartBig');
+
+  const W = base.width, H = base.height;
+  const cx = W/2, cy = H/2;
+  const cookieRadius = 170;
+
+  // triangle geometry
+  const pts = [
+    { x: cx, y: cy - cookieRadius }, // top
+    { x: cx - cookieRadius * Math.sin(Math.PI/3), y: cy + cookieRadius/2 }, // bottom-left
+    { x: cx + cookieRadius * Math.sin(Math.PI/3), y: cy + cookieRadius/2 }  // bottom-right
+  ];
+  const edges = [
+    [pts[1], pts[2]], // bottom
+    [pts[2], pts[0]], // right
+    [pts[0], pts[1]]  // left
+  ];
+
+  // mask and temp canvases (unchanged)
+  const maskCanvas = document.createElement('canvas');
+  maskCanvas.width = W; maskCanvas.height = H;
+  const mctx = maskCanvas.getContext('2d');
+
+  const temp = document.createElement('canvas');
+  temp.width = W; temp.height = H;
+  const tctx = temp.getContext('2d');
+
+  // global checkpoints (visual)
+  const checkpoints = edges.map(([A,B]) => {
+    const arr = [];
+    for (let i=0;i<CHECKPOINTS_PER_EDGE;i++){
+      const t = i/(CHECKPOINTS_PER_EDGE-1);
+      arr.push({ x: A.x + (B.x - A.x)*t, y: A.y + (B.y - A.y)*t, v: false });
+    }
+    return arr;
+  });
+
+  // session-specific arrays (reset on pointerdown) — used to decide win for single continuous stroke
+  let sessionVisited = null;       // array per edge of booleans
+  let sessionMinProj = null;
+  let sessionMaxProj = null;
+  let sessionActive = false;
+
+  // state
+  let drawing = false;
+  let startedOnBand = false;
+  let gameOver = false;
+  let lastPos = null;
+  let consecutiveStrays = 0;
+
+  // draw cookie + band + mask
+  function drawBaseAndMask(){
+    bctx.clearRect(0,0,W,H);
+    bctx.fillStyle = '#f5d88c';
+    bctx.beginPath(); bctx.arc(cx, cy, cookieRadius + 60, 0, Math.PI*2); bctx.fill();
+
+    bctx.lineWidth = BAND_WIDTH;
+    bctx.strokeStyle = '#000';
+    bctx.lineJoin = 'round';
+    bctx.beginPath();
+    bctx.moveTo(pts[0].x, pts[0].y);
+    bctx.lineTo(pts[1].x, pts[1].y);
+    bctx.lineTo(pts[2].x, pts[2].y);
+    bctx.closePath();
+    bctx.stroke();
+
+    // mask for band (white where band is)
+    mctx.clearRect(0,0,W,H);
+    mctx.lineWidth = BAND_WIDTH;
+    mctx.lineJoin = 'round';
+    mctx.strokeStyle = 'rgba(255,255,255,1)';
+    mctx.beginPath();
+    mctx.moveTo(pts[0].x, pts[0].y);
+    mctx.lineTo(pts[1].x, pts[1].y);
+    mctx.lineTo(pts[2].x, pts[2].y);
+    mctx.closePath();
+    mctx.stroke();
+  }
+
+  function distToSegment(px,py, x1,y1,x2,y2){
+    const vx = x2-x1, vy = y2-y1;
+    const wx = px-x1, wy = py-y1;
+    const c = vx*wx + vy*wy;
+    const l2 = vx*vx + vy*vy;
+    let t = 0;
+    if (l2 > 0) t = Math.max(0, Math.min(1, c / l2));
+    const projx = x1 + vx*t;
+    const projy = y1 + vy*t;
+    return { d: Math.hypot(px-projx, py-projy), t };
+  }
+
+  function maskHasAlpha(px,py){
+    const x = Math.round(px), y = Math.round(py);
+    if (x < 0 || x >= W || y < 0 || y >= H) return false;
+    const d = mctx.getImageData(x,y,1,1).data;
+    return d[3] > 10;
+  }
+
+  // markBetween: sample along segment and mark checkpoints for ALL edges
+  function markBetween(prev, cur){
+    if (!prev) return;
+    const dx = cur.x - prev.x, dy = cur.y - prev.y;
+    const segLen = Math.hypot(dx,dy);
+    const step = Math.max(1, Math.floor(CHECK_TOLERANCE / 2));
+    const steps = Math.max(1, Math.ceil(segLen / step));
+    const neighbor = Math.max(4, Math.round(CHECK_TOLERANCE / 2));
+
+    for (let s=0; s<=steps; s++){
+      const tseg = s/steps;
+      const x = prev.x + dx * tseg;
+      const y = prev.y + dy * tseg;
+
+      for (let e=0; e<edges.length; e++){
+        const A = edges[e][0], B = edges[e][1];
+        const edgeLenSq = (B.x - A.x)**2 + (B.y - A.y)**2;
+        const dot = ((x - A.x)*(B.x - A.x) + (y - A.y)*(B.y - A.y));
+        let proj = 0;
+        if (edgeLenSq > 0) proj = dot / edgeLenSq;
+        const { d } = distToSegment(x,y, A.x,A.y, B.x,B.y);
+        if (d <= CHECK_TOLERANCE * 1.45 && proj >= -0.03 && proj <= 1.03){
+          // update session min/max for this edge
+          if (sessionActive){
+            sessionMinProj[e] = Math.min(sessionMinProj[e], proj);
+            sessionMaxProj[e] = Math.max(sessionMaxProj[e], proj);
+          }
+          // mark global visual checkpoints
+          const arr = checkpoints[e];
+          const idx = Math.round((arr.length - 1) * proj);
+          for (let k = Math.max(0, idx - neighbor); k <= Math.min(arr.length - 1, idx + neighbor); k++){
+            const c = arr[k];
+            if (!c.v){
+              const dd = Math.hypot(c.x - x, c.y - y);
+              if (dd <= CHECK_TOLERANCE * 1.5) c.v = true;
+            }
+          }
+          // mark session visited if active
+          if (sessionActive){
+            const sArr = sessionVisited[e];
+            const idxS = Math.round((sArr.length - 1) * proj);
+            for (let k = Math.max(0, idxS - neighbor); k <= Math.min(sArr.length - 1, idxS + neighbor); k++){
+              const sd = Math.hypot(checkpoints[e][k].x - x, checkpoints[e][k].y - y);
+              if (sd <= CHECK_TOLERANCE * 1.5) sArr[k] = true;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // compute coverage fraction for an array of booleans
+  function fractionVisited(arr){
+    const visited = arr.reduce((s,v) => s + (v ? 1 : 0), 0);
+    return visited / arr.length;
+  }
+
+  // check if session meets per-edge thresholds
+  function sessionEdgeComplete(e){
+    const arr = sessionVisited[e];
+    const cov = fractionVisited(arr);
+    const spread = Math.max(0, sessionMaxProj[e] - sessionMinProj[e]);
+    return cov >= SESSION_PROGRESS_THRESHOLD && spread >= SESSION_EDGE_SPREAD;
+  }
+
+  function checkSessionWinImmediate(){
+    if (!sessionActive || gameOver) return false;
+    // check all three edges complete within this session
+    for (let e=0;e<3;e++){
+      if (!sessionEdgeComplete(e)) return false;
+    }
+    return true;
+  }
+
+  // drawing into temp, masking and stamping to strokes canvas
+  function stampStrokeSegment(prev, cur){
+    if (!prev){
+      tctx.clearRect(0,0,W,H);
+      tctx.beginPath();
+      tctx.fillStyle = 'rgba(57,255,20,1)';
+      tctx.shadowBlur = MARKER_THICKNESS * 1.2; tctx.shadowColor = 'rgba(57,255,20,0.95)';
+      tctx.arc(cur.x, cur.y, Math.max(3, MARKER_THICKNESS/2), 0, Math.PI*2); tctx.fill();
+      tctx.shadowBlur = 0;
+      tctx.globalCompositeOperation = 'destination-in';
+      tctx.drawImage(maskCanvas, 0, 0);
+      tctx.globalCompositeOperation = 'source-over';
+      sctx.drawImage(temp, 0, 0);
+      tctx.clearRect(0,0,W,H);
+      return;
+    }
+    tctx.clearRect(0,0,W,H);
+    tctx.save();
+    tctx.lineJoin = 'round'; tctx.lineCap = 'round';
+    tctx.strokeStyle = 'rgba(57,255,20,1)';
+    tctx.lineWidth = MARKER_THICKNESS;
+    tctx.shadowBlur = MARKER_THICKNESS * 0.9;
+    tctx.shadowColor = 'rgba(57,255,20,0.95)';
+    tctx.beginPath(); tctx.moveTo(prev.x, prev.y); tctx.lineTo(cur.x, cur.y); tctx.stroke();
+    tctx.restore();
+    tctx.globalCompositeOperation = 'destination-in';
+    tctx.drawImage(maskCanvas, 0, 0);
+    tctx.globalCompositeOperation = 'source-over';
+    sctx.drawImage(temp, 0, 0);
+    tctx.clearRect(0,0,W,H);
+  }
+
+  function drawPointer(px,py){
+    tctx.clearRect(0,0,W,H);
+    tctx.save();
+    tctx.fillStyle = 'rgba(57,255,20,1)';
+    tctx.shadowBlur = MARKER_THICKNESS * 1.1;
+    tctx.shadowColor = 'rgba(57,255,20,0.92)';
+    tctx.beginPath(); tctx.arc(px, py, Math.max(3, MARKER_THICKNESS/2), 0, Math.PI*2); tctx.fill();
+    tctx.restore();
+    tctx.globalCompositeOperation = 'destination-in';
+    tctx.drawImage(maskCanvas, 0, 0);
+    tctx.globalCompositeOperation = 'source-over';
+    pctx.clearRect(0,0,W,H);
+    pctx.drawImage(temp, 0, 0);
+    tctx.clearRect(0,0,W,H);
+  }
+
+  function getPointerPos(e){
+    const rect = base.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: clientX - rect.left, y: clientY - rect.top };
+  }
+
+  // nearest edge index helper
+  function nearestEdgeIndex(px,py){
+    let best=0, bestD=Infinity;
+    for (let e=0;e<3;e++){
+      const { d } = distToSegment(px,py, edges[e][0].x, edges[e][0].y, edges[e][1].x, edges[e][1].y);
+      if (d < bestD){ bestD = d; best = e; }
+    }
+    return { idx: best, dist: bestD };
+  }
+
+  // WIN/LOSE effects (unchanged)
+  function launchConfetti(count = 120){
+    const pieces = [];
+    for (let i=0;i<count;i++){
+      pieces.push({
+        x: Math.random()*W,
+        y: Math.random()*-H,
+        vx: (Math.random()-0.5)*2,
+        vy: 2 + Math.random()*3,
+        size: 4 + Math.random()*8,
+        rot: Math.random()*Math.PI*2, drot: (Math.random()-0.5)*0.2,
+        color: `hsl(${Math.random()*360}, 90%, 60%)`
+      });
+    }
+    let t = 0; const maxFrames = 220;
+    function frame(){
+      confettiCtx.clearRect(0,0,W,H);
+      for (const p of pieces){
+        p.x += p.vx; p.y += p.vy; p.rot += p.drot;
+        confettiCtx.save(); confettiCtx.translate(p.x,p.y); confettiCtx.rotate(p.rot);
+        confettiCtx.fillStyle = p.color; confettiCtx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.6);
+        confettiCtx.restore();
+        if (p.y > H + 20) { p.y = -10; p.x = Math.random() * W; }
+      }
+      t++; if (t < maxFrames) requestAnimationFrame(frame); else confettiCtx.clearRect(0,0,W,H);
+    }
+    frame();
+  }
+
+  function showCracks(){
+    effectsCtx.clearRect(0,0,W,H);
+    const branches = []; const branchCount = 7;
+    for (let i=0;i<branchCount;i++){
+      const angle = (Math.PI*2) * (i/branchCount) + (Math.random()-0.5)*0.4;
+      const length = cookieRadius * (0.45 + Math.random()*0.6);
+      const points = []; const segs = 6 + Math.floor(Math.random()*5);
+      for (let s=0;s<=segs;s++){
+        const t = s/segs;
+        const jitter = (Math.random()-0.5) * 16 * (1 - t);
+        const x = cx + Math.cos(angle) * length * t + Math.cos(angle + Math.PI/2) * jitter;
+        const y = cy + Math.sin(angle) * length * t + Math.sin(angle + Math.PI/2) * jitter;
+        points.push({x,y});
+      }
+      branches.push({ points, progress: 0 });
+    }
+    let frame = 0;
+    function drawFrame(){
+      effectsCtx.clearRect(0,0,W,H);
+      effectsCtx.lineWidth = 3; effectsCtx.strokeStyle = '#000'; effectsCtx.shadowBlur = 6; effectsCtx.shadowColor = '#000';
+      for (const br of branches){
+        const end = Math.floor(br.points.length * br.progress);
+        if (end >= 1){
+          effectsCtx.beginPath(); effectsCtx.moveTo(cx, cy);
+          for (let i=1;i<=end;i++){ const p = br.points[i]; effectsCtx.lineTo(p.x, p.y); }
+          effectsCtx.stroke();
+        }
+      }
+      frame++;
+      branches.forEach(br => { br.progress = Math.min(1, br.progress + 0.05 + Math.random()*0.03); });
+      if (frame < 60) requestAnimationFrame(drawFrame);
+    }
+    drawFrame();
+  }
+
+  function winGame(){
+    if (gameOver) return;
+    gameOver = true; drawing = false; sessionActive = false;
+    pctx.clearRect(0,0,W,H);
+    msgEl.textContent = '✅ Perfect! You won!'; msgEl.className = 'win';
+    launchConfetti(140);
+  }
+
+  function loseGame(){
+    if (gameOver) return;
+    gameOver = true; drawing = false; sessionActive = false;
+    pctx.clearRect(0,0,W,H);
+    msgEl.textContent = '❌ You broke it!'; msgEl.className = 'lose';
+    showCracks();
+    restartBigBtn.style.display = 'block';
+  }
+
+  // Reset + UI
+  function resetState(){
+    drawing=false; startedOnBand=false; gameOver=false; lastPos=null; consecutiveStrays=0;
+    sessionActive=false;
+    sessionVisited=null; sessionMinProj=null; sessionMaxProj=null;
+    for (let e=0;e<3;e++) for (const c of checkpoints[e]) c.v = false;
+    sctx.clearRect(0,0,W,H); pctx.clearRect(0,0,W,H); confettiCtx.clearRect(0,0,W,H); effectsCtx.clearRect(0,0,W,H);
+    restartBigBtn.style.display='none';
+    msgEl.textContent='Click the black band to start tracing the triangle.'; msgEl.className='';
+  }
+
+  resetBtn.addEventListener('click', ()=>{ resetState(); drawBaseAndMask(); });
+  restartBigBtn.addEventListener('click', ()=>{ resetState(); drawBaseAndMask(); });
+
+  // HINT button: small blink near start of current edge
+  hintBtn.addEventListener('click', ()=>{
+    const arr = checkpoints[0];
+    let f=0;
+    const id = setInterval(()=>{
+      pctx.clearRect(0,0,W,H);
+      if (f % 2 === 0){
+        pctx.beginPath(); pctx.fillStyle='rgba(57,255,20,0.9)';
+        const c = arr[Math.floor(arr.length/12)];
+        pctx.arc(c.x, c.y, Math.max(4, MARKER_THICKNESS/2), 0, Math.PI*2);
+        pctx.fill();
+      }
+      f++; if (f>6){ clearInterval(id); pctx.clearRect(0,0,W,H); }
+    }, 220);
+  });
+
+  // pointer event handlers
+  wrap.addEventListener('pointerdown', (ev) => {
+    if (gameOver) return;
+    const p = getPointerPos(ev);
+    if (maskHasAlpha(p.x, p.y)){
+      drawing = true; startedOnBand = true; consecutiveStrays = 0; lastPos = p;
+      // start a fresh session for single-stroke win detection
+      sessionActive = true;
+      sessionVisited = edges.map(e => new Array(CHECKPOINTS_PER_EDGE).fill(false));
+      sessionMinProj = [1,1,1]; sessionMaxProj = [0,0,0];
+      msgEl.textContent = 'Tracing...';
+      stampStrokeSegment(null, p);
+      markBetween(p, p);
+      if (checkSessionWinImmediate()) winGame();
+    } else {
+      drawing = false; startedOnBand = false;
+      msgEl.textContent = 'Start on the black band (click the band).';
+      msgEl.className = '';
+    }
+  });
+
+  wrap.addEventListener('pointermove', (ev) => {
+    const p = getPointerPos(ev);
+    if (!drawing || gameOver){
+      if (!gameOver){
+        if (maskHasAlpha(p.x, p.y)) drawPointer(p.x, p.y);
+        else pctx.clearRect(0,0,W,H);
+      }
+      return;
+    }
+    if (maskHasAlpha(p.x, p.y)){
+      consecutiveStrays = 0;
+      stampStrokeSegment(lastPos, p);
+      markBetween(lastPos, p);
+      // immediate session check to win as soon as session completes
+      if (checkSessionWinImmediate()) { winGame(); return; }
+      drawPointer(p.x, p.y);
+      lastPos = p;
+    } else {
+      consecutiveStrays++;
+      if (consecutiveStrays >= STRAY_ALLOWANCE){
+        loseGame();
+      } else {
+        msgEl.textContent = `Careful — ${STRAY_ALLOWANCE - consecutiveStrays} slip(s) left.`;
+        pctx.clearRect(0,0,W,H);
+        pctx.beginPath(); pctx.fillStyle = 'rgba(255,255,255,0.06)';
+        pctx.arc(p.x,p.y, Math.max(3, MARKER_THICKNESS/2), 0, Math.PI*2);
+        pctx.fill();
+      }
+    }
+  });
+
+  wrap.addEventListener('pointerup', () => {
+    drawing = false;
+    lastPos = null;
+    // If the session wasn't complete during drawing, check on lift
+    if (!gameOver && sessionActive){
+      let ok = true;
+      for (let e=0;e<3;e++){
+        if (!sessionEdgeComplete(e)){ ok = false; break; }
+      }
+      if (ok) winGame();
+      else {
+        // do nothing — user can restart or try again (we do NOT accumulate across sessions)
+        msgEl.textContent = 'Lifted — try another single smooth pass to win.';
+        msgEl.className = '';
+      }
+      sessionActive = false; // session ended
+    }
+  });
+
+  // initial draw
+  drawBaseAndMask();
+  resetState();
+
+  // helper: expose for debugging
+  window.dg = { checkpoints, maskCanvas, reset: resetState };
+})();
+
+ const pin = document.getElementById("pin");
+
+    document.addEventListener("mousemove", (e) => {
+      pin.style.left = e.clientX + "px";
+      pin.style.top = e.clientY + "px";
+    });
+</script>
+</body>
+</html>

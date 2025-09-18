@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Squid Game | Lobby</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/webp" href="https://videos.openai.com/vg-assets/assets%2Ftask_01k5e4c143e34v8fb1kfkv3dka%2F1758189800_img_0.webp?st=2025-09-18T08%3A39%3A55Z&se=2025-09-24T09%3A39%3A55Z&sks=b&skt=2025-09-18T08%3A39%3A55Z&ske=2025-09-24T09%3A39%3A55Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=ESruV8K0zJNEs6m2ENnAn8gQEji4A%2Be6rup9fpJZ%2FMQ%3D&az=oaivgprodscus">
+</head>
+<body class="lobby_body">
+
+<img class="entrance" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k542j13zfa2an5gakp5b9pad%2F1757852397_img_0.webp?st=2025-09-14T10%3A52%3A53Z&se=2025-09-20T11%3A52%3A53Z&sks=b&skt=2025-09-14T10%3A52%3A53Z&ske=2025-09-20T11%3A52%3A53Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=fh9vXcrfyUPbhS%2B4s1Ryomb8SJ7RpJPwNHyubv7S5F0%3D&az=oaivgprodscus">
+  <img class="guards" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k542scagf8frsktjc1ptqn7n%2F1757852643_img_1.webp?st=2025-09-14T10%3A52%3A43Z&se=2025-09-20T11%3A52%3A43Z&sks=b&skt=2025-09-14T10%3A52%3A43Z&ske=2025-09-20T11%3A52%3A43Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=TlLLDmu7ideNmq3PZYCAFUaS9fskKEc3UjtiJteLhhU%3D&az=oaivgprodscus">
+
+  <div id="alarm" style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: red;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+  "></div>
+
+  <audio id="bgMusic" src="resources/squid_games_pink_solid.mp3"></audio>
+
+  <div class="gamemode_cnt">
+     <div class="gamecnt_1">
+      <a href="triangle.html"><img class="banner" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k5e2ggymer69t4pq9xyk2hjh%2F1758187899_img_0.webp?st=2025-09-18T07%3A43%3A15Z&se=2025-09-24T08%3A43%3A15Z&sks=b&skt=2025-09-18T07%3A43%3A15Z&ske=2025-09-24T08%3A43%3A15Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=o1nX3DCBMNbHnc7JBc5aLOrNmLpSjZtBtzkvfarDhIc%3D&az=oaivgprodscus"></a>
+      <a href="circle.html"><img class="banner" src="https://videos.openai.com/vg-assets/assets%2Ftask_01k5e2wc37fgcrx4d2ceax3vht%2F1758188267_img_0.webp?st=2025-09-18T07%3A43%3A47Z&se=2025-09-24T08%3A43%3A47Z&sks=b&skt=2025-09-18T07%3A43%3A47Z&ske=2025-09-24T08%3A43%3A47Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8b872fb2-b44b-4c1d-9ff6-1d4509d19e6e&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=nZR80mRlxiHUA9dzMNjihXihZ3u4mkWvaW%2FueFRdi3Y%3D&az=oaivgprodscus"></a>
+    </div>
+  </div>
+
+  <script>
+    const alarm = document.getElementById('alarm');
+    const music = document.getElementById('bgMusic');
+    const gamemode = document.querySelector('.gamemode_cnt');
+
+    // Start music at 0 volume for fade-in
+    music.volume = 0;
+    music.play().catch(() => console.log('User interaction required'));
+
+    // Fade-in music over 10s
+    let fadeInDuration = 10000;
+    let fadeInSteps = 50;
+    let fadeInStepTime = fadeInDuration / fadeInSteps;
+    let fadeInVolumeStep = 1 / fadeInSteps;
+
+    let fadeInInterval = setInterval(() => {
+      if (music.volume + fadeInVolumeStep >= 1) {
+        music.volume = 1;
+        clearInterval(fadeInInterval);
+      } else {
+        music.volume += fadeInVolumeStep;
+      }
+    }, fadeInStepTime);
+
+    // Red alarm starts when guards appear (10s)
+    setTimeout(() => {
+      let flash = true;
+      alarm.style.opacity = 0.5;
+      const interval = setInterval(() => {
+        alarm.style.opacity = flash ? 0.5 : 0;
+        flash = !flash;
+      }, 500);
+
+      // Stop alarm after 15s
+      setTimeout(() => {
+        clearInterval(interval);
+        alarm.style.opacity = 0;
+      }, 15000);
+    }, 10000);
+
+    // Fade-out music and show gamemode after images disappear (25s)
+    setTimeout(() => {
+      // Fade-out music over 5s
+      let fadeOutDuration = 5000;
+      let fadeOutSteps = 50;
+      let fadeOutStepTime = fadeOutDuration / fadeOutSteps;
+      let fadeOutVolumeStep = 1 / fadeOutSteps;
+
+      let fadeOutInterval = setInterval(() => {
+        if (music.volume - fadeOutVolumeStep <= 0) {
+          music.volume = 0;
+          music.pause();
+          music.currentTime = 0;
+          clearInterval(fadeOutInterval);
+        } else {
+          music.volume -= fadeOutVolumeStep;
+        }
+      }, fadeOutStepTime);
+
+      // Fade-in gamemode
+      gamemode.classList.add('visible');
+    }, 25000); // after images hide
+  </script>
+</body>
+</html>
